@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption Demo</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for dark mode */
+        }
+
+        .container {
+            max-width: 500px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for dark mode */
+        }
+
+        .demo-container {
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for dark mode */
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label, select, input[type="number"], textarea, input[type="button"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="button"] {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+        
+        #encrypted-message {
+        font-family: 'Times New Roman', Times, serif;
+        background-color: #f2f2f2;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 18px;
+        margin-top: 10px;
+        color: #333; /* Default text color in light mode */
+    }
+    
+    /* Additional style for dark mode */
+    #encrypted-message.dark-mode {
+    color: #ffffff; /* Change text color in dark mode */
+    }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            max-width: 100%;
+            max-height: 150px;
+            height: auto;
+        }
+
+        /* Personal Info Container */
+        .personal-info-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for dark mode */
+        }
+
+        .personal-info {
+            font-family: "Times New Roman", serif;
+            font-size: large;
+            color: #333;
+            transition: color 0.3s ease; /* Add color transition */
+        }
+
+        /* Style elements that should not change color during dark mode */
+        .no-color-change {
+            color: inherit !important;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .container.dark-mode {
+            background-color: #333;
+            color: #ffffff;
+        }
+
+        .demo-container.dark-mode {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .personal-info-container.dark-mode {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .personal-info.dark-mode {
+            color: white;
+        }
+
+        .dark-mode-toggle {
+         position: absolute;
+         top: 20px;
+         right: 50px;
+         cursor: pointer;
+         font-size: 24px;
+         font-family: "Times New Roman", serif;
+         color: #333; /* Dark mode button color */
+         transition: color 0.3s ease; /* Add a color transition */
+}
+.dark-mode-toggle:hover {
+    color: #fff; /* Dark mode button color on hover */
+}
+
+ /* Add specific style for the "Encryption Demo" heading */
+ h1.encryption-demo {
+    font-size: 24px;
+    font-weight: 500;
+    color: #333; /* Default text color in light mode */
+    transition: color 0.3s ease; /* Add transition for color change */
+}
+
+/* Update the dark mode styles for the "Encryption Demo" heading */
+h1.encryption-demo.dark-mode {
+    color: #ffffff; /* Change text color in dark mode */
+}
+
+
+
+</style>
+
+</head>
+<body>
+<div class="dark-mode-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</div>
+<div class="personal-info-container">
+    <div class="personal-info no-color-change">
+        <p>Name: Somesh Diwan</p>
+        <p>Class: TY-AIML</p>
+        <p>Project Name: Generating encrypted message</p>
+    </div>
+</div>
+<div class="container">
+    <div class="logo">
+        <img src="University-Logo-1-1.png" alt="Logo">
+    
+    </div>
+        <label for="message">Enter your message:</label>
+        <textarea id="message" rows="4" cols="50"></textarea>
+        <label for="choice">Select encryption method:</label>
+        <select id="choice">
+            <option value="caesar">Caesar Cipher</option>
+            <option value="modifiedCaesar">Modified Caesar Cipher</option>
+            <option value="monoAlphabetic">Mono-Alphabetic Cipher</option>
+            <option value="railFence">Rail Fence Cipher</option>
+            <option value="columnar">Columnar Transposition Cipher</option>
+            <option value="polyAlphabetic">Poly-Alphabetic Cipher</option>
+        </select>
+        <label for="key">Key (if applicable):</label>
+        <input type="number" id="key">
+        <input type="button" value="Encrypt" onclick="encryptMessage()">
+        <h2>Encrypted Message:</h2>
+        <p id="encrypted-message"></p>
+    </div>
+
+<script>
+    function caesarCipher(info, key) {
+        const alp1 = "abcdefghijklmnopqrstuvwxyz";
+        let result = "";
+
+        for (let i = 0; i < info.length; i++) {
+            const char = info[i];
+            if (alp1.includes(char)) {
+                const charIndex = alp1.indexOf(char);
+                const newIndex = (charIndex + key) % 26;
+                result += alp1[newIndex];
+            } else {
+                result += char;
+            }
+        }
+
+        return result;
+    }
+
+    function modifiedCaesarCipher(info, key) {
+        const alp1 = "abcdefghijklmnopqrstuvwxyz";
+        let result = "";
+
+        for (let i = 0; i < info.length; i++) {
+            const char = info[i];
+            if (alp1.includes(char)) {
+                const charIndex = alp1.indexOf(char);
+                const newIndex = (charIndex + key * 2) % 26;
+                result += alp1[newIndex];
+            } else {
+                result += char;
+            }
+        }
+
+        return result;
+    }
+
+    function monoAlphabeticCipher(info) {
+        const originalAlphabet = "abcdefghijklmnopqrstuvwxyz";
+        const scrambledAlphabet = "qwertyuiopasdfghjklzxcvbnm";
+        let result = "";
+
+        for (let i = 0; i < info.length; i++) {
+            const char = info[i].toLowerCase();
+            if (originalAlphabet.includes(char)) {
+                const charIndex = originalAlphabet.indexOf(char);
+                result += scrambledAlphabet[charIndex];
+            } else {
+                result += char;
+            }
+        }
+
+        return result;
+    }
+
+    function railFenceCipher(info, key) {
+        const message = info.replace(/ /g, "");
+        const matrix = [];
+        const encryptedMessage = [];
+
+        for (let i = 0; i < key; i++) {
+            matrix.push([]);
+        }
+
+        let row = 0;
+        let direction = "down";
+
+        for (let i = 0; i < message.length; i++) {
+            matrix[row].push(message[i]);
+
+            if (row === 0) {
+                direction = "down";
+            } else if (row === key - 1) {
+                direction = "up";
+            }
+
+            if (direction === "down") {
+                row++;
+            } else if (direction === "up") {
+                row--;
+            }
+        }
+
+        for (let i = 0; i < key; i++) {
+            encryptedMessage.push(...matrix[i]);
+        }
+
+        return encryptedMessage.join("");
+    }
+
+    function columnarTransposition(info, key) {
+        const message = info.replace(/ /g, "");
+        const colCount = key;
+        const rowCount = Math.ceil(message.length / key);
+        const matrix = [];
+
+        for (let i = 0; i < rowCount; i++) {
+            matrix.push([]);
+        }
+
+        let charIndex = 0;
+
+        for (let i = 0; i < rowCount; i++) {
+            for (let j = 0; j < colCount; j++) {
+                if (charIndex < message.length) {
+                    matrix[i][j] = message[charIndex];
+                    charIndex++;
+                }
+            }
+        }
+
+        let result = "";
+
+        for (let j = 0; j < colCount; j++) {
+            for (let i = 0; i < rowCount; i++) {
+                if (matrix[i][j] !== undefined) {
+                    result += matrix[i][j];
+                }
+            }
+        }
+
+        return result;
+    }
+
+    function polyAlphabeticCipher(info, key) {
+        const alp1 = "abcdefghijklmnopqrstuvwxyz";
+        const alp2 = "zyxwvutsrqponmlkjihgfedcba";
+        let result = "";
+
+        for (let i = 0; i < info.length; i++) {
+            const char = info[i];
+            if (alp1.includes(char.toLowerCase())) {
+                const charIndex = alp1.indexOf(char.toLowerCase());
+                const newChar = key[i % key.length].toLowerCase();
+                const newIndex = (charIndex + alp1.indexOf(newChar)) % 26;
+                result += char === char.toUpperCase() ? alp1[newIndex].toUpperCase() : alp1[newIndex];
+            } else {
+                result += char;
+            }
+        }
+
+        return result;
+    }
+
+    function encryptMessage() {
+        const message = document.getElementById("message").value;
+        const choice = document.getElementById("choice").value;
+        const key = document.getElementById("key").value;
+        let encryptedMessage = "";
+
+        switch (choice) {
+            case "caesar":
+                encryptedMessage = caesarCipher(message, parseInt(key));
+                break;
+            case "modifiedCaesar":
+                encryptedMessage = modifiedCaesarCipher(message, parseInt(key));
+                break;
+            case "monoAlphabetic":
+                encryptedMessage = monoAlphabeticCipher(message);
+                break;
+            case "railFence":
+                encryptedMessage = railFenceCipher(message, parseInt(key));
+                break;
+            case "columnar":
+                encryptedMessage = columnarTransposition(message, parseInt(key));
+                break;
+            case "polyAlphabetic":
+                encryptedMessage = polyAlphabeticCipher(message, "key");
+                break;
+            default:
+                encryptedMessage = "Invalid choice";
+        }
+
+        document.getElementById("encrypted-message").textContent = encryptedMessage;
+    }
+
+    function toggleDarkMode() {
+        const body = document.body;
+        const containers = document.querySelectorAll(".container");
+        const personalInfoContainer = document.querySelector(".personal-info-container");
+        const personalInfo = document.querySelectorAll(".personal-info");
+        const darkModeToggle = document.querySelector(".dark-mode-toggle");
+
+        body.classList.toggle("dark-mode");
+
+        containers.forEach(container => {
+            container.classList.toggle("dark-mode");
+        });
+
+        personalInfoContainer.classList.toggle("dark-mode");
+
+        personalInfo.forEach(info => {
+            info.classList.toggle("dark-mode");
+        });
+
+        darkModeToggle.classList.toggle("dark-mode");
+        darkModeToggle.textContent = body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
+    }
+</script>
+</body>
+</html>
