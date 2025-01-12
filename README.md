@@ -33,8 +33,5 @@ Explore the app here: [Generating Encrypted Message](https://someshdiwan.github.
 
 ---
 
-## 📜 How to Use  
-
-1. Clone this repository:  
-   ```bash
-   git clone https://github.com/someshdiwan/GeneratingEncryptedMessage.git
+🌟 Show Your Support
+If you like this project, please consider giving it a ⭐ on GitHub!
