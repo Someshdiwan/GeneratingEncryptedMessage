@@ -20,7 +20,7 @@ This open-source tool lets you encrypt and decrypt text using various encryption
 
 ## 🌐 Live Demo  
 
-Explore the app here: [Generating Encrypted Message](https://someshdiwan.github.io/GeneratingEncryptedMessage)  
+Explore the app here: [Generating Encrypted Message](https://someshdiwan.github.io/SafeMessageGenerator/)  
 
 ---
 
