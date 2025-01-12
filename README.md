@@ -4,7 +4,7 @@ Secure your messages with powerful encryption techniques! This open-source proje
 
 This open-source tool lets you encrypt and decrypt text using various encryption techniques. Whether you're a developer, student, or encryption enthusiast, our project provides a simple and effective way to ensure message security. Accessible, user-friendly, and completely open-source, it’s a perfect fit for your cryptography needs.
 
-[![Website Status](https://img.shields.io/website?url=https%3A%2F%2Fsomeshdiwan.github.io%2FGeneratingEncryptedMessage)](https://someshdiwan.github.io/GeneratingEncryptedMessage)  
+[![Website Status](https://img.shields.io/website?url=https%3A%2F%2Fsomeshdiwan.github.io%2FGeneratingEncryptedMessage)](https://someshdiwan.github.io/SafeMessageGenerator/)  
 ![GitHub License](https://img.shields.io/github/license/someshdiwan/GeneratingEncryptedMessage)  
 ![GitHub stars](https://img.shields.io/github/stars/someshdiwan/GeneratingEncryptedMessage)  
 
